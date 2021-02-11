@@ -1,190 +1,174 @@
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 module Enumerable
-    def my_each
-      return to_enum(:my_each) unless block_given?
-  
-      i = 0
-      while i < to_a.length
-        yield to_a[i]
-        i += 1
-      end
-      self
+  def my_each
+    return to_enum(:my_each) unless block_given?
+
+    i = 0
+    while i < to_a.length
+      yield to_a[i]
+      i += 1
     end
+    self
+  end
 
-    def my_each_with_index
-        return to_enum(:my_each_with_index) unless block_given?
-    
-        i = 0
-        while i < to_a.length
-            yield([to_a[i], i])
-          i += 1
-        end
-        self
-      end
+  def my_each_with_index
+    return to_enum(:my_each_with_index) unless block_given?
 
-    #   my select_enumerable
-    def my_select
-        return to_enum(:my_select) unless block_given?
-    
-        new_arr = []
-        self.my_each { |item| new_arr << item if yield (item) }
-         new_arr
-      end
-       #   my select_enumerable-code
-
-    #    my_all code
-    def my_all?(param = nil)
-        if block_given?
-          to_a.my_each { |item| return false if yield(item) == false }
-          return true
-        elsif param.nil?
-          to_a.my_each { |item| return false if item.nil? || item == false }
-        elsif !param.nil? && (param.is_a? Class)
-          to_a.my_each { |item| return false unless [item.class, item.class.superclass].include?(param) }
-        elsif !param.nil? && param.instance_of?(Regexp)
-          to_a.my_each { |item| return false unless param.match(item) }
-        else
-          to_a.my_each { |item| return false if item != param }
-        end
-        true
-      end
-
-    # my_all code
-    def my_all?(param = nil)
-        if block_given?
-          to_a.my_each { |item| return false if yield(item) == false }
-          return true
-        elsif param.nil?
-          to_a.my_each { |item| return false if item.nil? || item == false }
-        elsif !param.nil? && (param.is_a? Class)
-          to_a.my_each { |item| return false unless [item.class, item.class.superclass].include?(param) }
-        elsif !param.nil? && param.instance_of?(Regexp)
-          to_a.my_each { |item| return false unless param.match(item) }
-        else
-          to_a.my_each { |item| return false if item != param }
-        end
-        true
-      end
-
-    # my_all
-
-    # my_any start
-    def my_any?(param = nil)
-        if block_given?
-          to_a.my_each { |item| return true if yield(item) }
-          return false
-        elsif param.nil?
-          to_a.my_each { |item| return true if item }
-        elsif !param.nil? && (param.is_a? Class)
-          to_a.my_each { |item| return true if [item.class, item.class.superclass].include?(param) }
-        elsif !param.nil? && param.instance_of?(Regexp)
-          to_a.my_each { |item| return true if param.match(item) }
-        else
-          to_a.my_each { |item| return true if item == param }
-        end
-        false
-      end
-
-    # my any_end
-
-    # my_none code 
-    def my_none?(param = nil)
-        if block_given?
-          !my_any?(&Proc.new)
-        else
-          !my_any?(param)
-        end
-      end
-    # my_none code end
-
-    # my_count
-    def my_count(param = nil)
-        c = 0
-        if block_given?
-          to_a.my_each { |item| c += 1 if yield(item) }
-        elsif !block_given? && param.nil?
-          c = to_a.length
-        else
-          c = to_a.my_select { |item| item == param }.length
-        end
-        c
-      end
-    # my_count
-
-    # my_map
-    def my_map(proc_x = nil)
-        return enum_for unless block_given?
-    
-        map_list = []
-        if proc_x.nil?
-          my_each { |element| map_list.push(yield(element)) }
-        else
-          my_each { |element| map_list.push(proc_x.call(element)) }
-        end
-        map_list
-      end
-    # my_map 
-
-    # my_inject code 
-    
-   
-
-    # my_inject code
-
+    i = 0
+    while i < to_a.length
+      yield([to_a[i], i])
+      i += 1
     end
+    self
+  end
 
+  def my_select
+    return to_enum(:my_select) unless block_given?
 
-# section for testing the enumerable
-# puts 'my_each array'
-# [2, 5, 6, 7].my_each do |i|
-#   puts i
-# end
+    new_arr = []
+    my_each { |item| new_arr << item if yield item }
+    new_arr
+  end
 
-# puts 'my_each Range'
-# (3..11).my_each do |n|
-#   puts n
-# end
+  def my_all?(param = nil)
+    if block_given?
+      to_a.my_each { |item| return false if yield(item) == false }
+      return true
+    elsif param.nil?
+      to_a.my_each { |item| return false if item.nil? || item == false }
+    elsif !param.nil? && (param.is_a? Class)
+      to_a.my_each { |item| return false unless [item.class, item.class.superclass].include?(param) }
+    elsif !param.nil? && param.instance_of?(Regexp)
+      to_a.my_each { |item| return false unless param.match(item) }
+    else
+      to_a.my_each { |item| return false if item != param }
+    end
+    true
+  end
 
-# puts 'my_each_with_index'
-# bc = [1,3,5,8,4]
-# bc.my_each_with_index do |n, i|
-#   puts i.to_s + ': ' + n.to_s
-# end
+  def my_any?(param = nil)
+    if block_given?
+      to_a.my_each { |item| return true if yield(item) }
+      return false
+    elsif param.nil?
+      to_a.my_each { |item| return true if item }
+    elsif !param.nil? && (param.is_a? Class)
+      to_a.my_each { |item| return true if [item.class, item.class.superclass].include?(param) }
+    elsif !param.nil? && param.instance_of?(Regexp)
+      to_a.my_each { |item| return true if param.match(item) }
+    else
+      to_a.my_each { |item| return true if item == param }
+    end
+    false
+  end
 
-# puts 'my_select'
-# arr = [2, 5, 6, 7]
-# c = arr.my_select do |n|
-#     n > 5
-# end
-# puts c
+  def my_none?(param = nil)
+    if block_given?
+      !my_any?(&Proc.new)
+    else
+      !my_any?(param)
+    end
+  end
 
+  def my_count(param = nil)
+    c = 0
+    if block_given?
+      to_a.my_each { |item| c += 1 if yield(item) }
+    elsif !block_given? && param.nil?
+      c = to_a.length
+    else
+      c = to_a.my_select { |item| item == param }.length
+    end
+    c
+  end
 
-# puts 'my_all'
-# w = [2, 4, 6, 7, 8, 4]
-# q = w.my_all? do |n|
-#   n < 9
-# end
-# puts q
+  def my_map(proc_x = nil)
+    return enum_for unless block_given?
 
+    map_list = []
+    if proc_x.nil?
+      my_each { |element| map_list.push(yield(element)) }
+    else
+      my_each { |element| map_list.push(proc_x.call(element)) }
+    end
+    map_list
+  end
 
-# puts 'my_any'
-# q = [4, 5, 6]
-# a = (q.my_any? { |n| n < 3 })
-# puts a
+  def my_inject(initial = nil, sym = nil)
+    if (!initial.nil? && sym.nil?) && (initial.is_a?(Symbol) || initial.is_a?(String))
+      sym = initial
+      initial = nil
+    end
+    if !block_given? && !sym.nil?
+      to_a.my_each { |item| initial = initial.nil? ? item : initial.send(sym, item) }
+    else
+      to_a.my_each { |item| initial = initial.nil? ? item : yield(initial, item) }
+    end
+    initial
+  end
 
-# puts 'my_none'
-# as = [4, 5, 6]
-# z = (as.my_none? { |n| n > 3 })
-# puts z
+  def multiply_els(arr)
+    arr.my_inject(1, '*')
+  end
+end
 
-# puts 'my_count Array'
-# puts [2, 3, 56, 6, 3, 2, 9, 1, 2, 3, 3, 5].my_count(3)
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
-# puts 'my_count Range'
-# puts (0..5).my_count(2)
+puts '1.--------my_each--------'
+%w[Sharon Leo Leila Brian Arun].my_each { |friend| puts friend }
 
-# puts 'my_map Range'
-# puts ((0..5).my_map { |i| i * i })
+puts '2.--------my_each_with_index--------'
+%w[Sharon Leo Leila Brian Arun].my_each_with_index { |friend, index| puts friend if index.even? }
 
+puts '3.--------my_select--------'
+puts (%w[Sharon Leo Leila Brian Arun].my_select { |friend| friend != 'Brian' })
 
+puts '4.--------my_all--------'
+puts (%w[ant bear cat].my_all? { |word| word.length >= 3 }) #=> true
+puts (%w[ant bear cat].my_all? { |word| word.length >= 4 }) #=> false
+puts %w[ant bear cat].my_all?(/t/) #=> false
+puts [1, 2i, 3.14].my_all?(Numeric) #=> true
+puts [].my_all? #=> true
 
-# End section for testing the enumerable
+puts '5.--------my_any--------'
+puts (%w[ant bear cat].my_any? { |word| word.length >= 3 }) #=> true
+puts (%w[ant bear cat].my_any? { |word| word.length >= 4 }) #=> true
+puts %w[ant bear cat].my_any?(/d/) #=> false
+puts [nil, true, 99].my_any?(Integer) #=> true
+puts [nil, true, 99].my_any? #=> true
+puts [].my_any? #=> false
+
+puts '6.--------my_none--------'
+puts (%w[ant bear cat].my_none? { |word| word.length == 5 }) #=> true
+puts (%w[ant bear cat].my_none? { |word| word.length >= 4 }) #=> false
+puts %w[ant bear cat].my_none?(/d/) #=> true
+puts [1, 3.14, 42].my_none?(Float) #=> false
+puts [].my_none? #=> true
+puts [nil].my_none? #=> true
+puts [nil, false].my_none? #=> true
+puts [nil, false, true].my_none? #=> false
+
+puts '7.--------my_count--------'
+arr = [1, 2, 4, 2]
+puts arr.my_count #=> 4
+puts arr.my_count(2) #=> 2
+puts (arr.my_count { |x| (x % 2).zero? }) #=> 3
+
+puts '8.--------my_maps--------'
+my_order = ['medium Big Mac', 'medium fries', 'medium milkshake']
+puts (my_order.my_map { |item| item.gsub('medium', 'extra large') })
+puts ((0..5).my_map { |i| i * i })
+puts 'my_map_proc'
+my_proc = proc { |i| i * i }
+puts (1..5).my_map(my_proc) { |i| i + i }
+
+puts '8.--------my_inject--------'
+puts ((1..5).my_inject { |sum, n| sum + n }) #=> 15
+puts (1..5).my_inject(1) { |product, n| product * n } #=> 120
+longest = %w[ant bear cat].my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+puts longest #=> "bear"
+
+puts 'multiply_els'
+puts multiply_els([2, 4, 5]) #=> 40
