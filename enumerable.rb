@@ -124,8 +124,11 @@ module Enumerable
       end
     # my_map 
 
+    # my_inject code 
+    
+   
 
-
+    # my_inject code
 
     end
 
@@ -179,8 +182,8 @@ module Enumerable
 # puts 'my_count Range'
 # puts (0..5).my_count(2)
 
-puts 'my_map Range'
-puts ((0..5).my_map { |i| i * i })
+# puts 'my_map Range'
+# puts ((0..5).my_map { |i| i * i })
 
 
 
