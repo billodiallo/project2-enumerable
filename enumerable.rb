@@ -113,4 +113,3 @@ module Enumerable
 end
 
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-
