@@ -1,4 +1,4 @@
-# bubble-sort-ruby
+# Enumerables
 
 ## Table of Contents
 
@@ -10,20 +10,21 @@
 
 <!-- ABOUT THE PROJECT   -->
 ## About The Project
-Enumerable
+In this project, we develop the already existing Ruby enumerable methods such as #each and many others, using our existing knowledge of important concepts in Ruby. 
 
 ### Built With
 
-* [RUBY]()
+* [RUBY](https://github.com/billodiallo/project2-enumerable/tree/feature-enum)
 
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
+## Getting Started
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b development`)
+2. Create your Feature Branch (`git checkout -b feature-enum`)
 3. Commit your Changes (`git commit -m 'Add '`)
-4. Push to the Branch (`git push origin development`)
+4. Push to the Branch (`git push origin feature-enum`)
 5. Open a Pull Request
 
 
