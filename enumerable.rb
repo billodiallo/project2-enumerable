@@ -16,7 +16,7 @@ module Enumerable
 
     i = 0
     while i < to_a.length
-      yield([to_a[i], i])
+      yield(to_a[i], i)
       i += 1
     end
     self
@@ -64,9 +64,9 @@ module Enumerable
 
   def my_none?(param = nil)
     if block_given?
-      !my_any?(&Proc.new)
+      !my_all?(&Proc.new)
     else
-      !my_any?(param)
+      !my_all?(param)
     end
   end
 
@@ -106,10 +106,11 @@ module Enumerable
     end
     initial
   end
+end
 
-  def multiply_els(arr)
-    arr.my_inject(1, '*')
-  end
+# multiply method
+def multiply_els(par)
+  par.my_inject(1) { |a, b| a * b }
 end
 
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity

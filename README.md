@@ -21,13 +21,14 @@ In this project, we develop the already existing Ruby enumerable methods such as
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 ## Getting Started
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature-enum`)
-3. Commit your Changes (`git commit -m 'Add '`)
-4. Push to the Branch (`git push origin feature-enum`)
-5. Open a Pull Request
+This is an example of how you may give instructions on setting up your project locally. Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.
 
+- To get a local copy up and running follow these simple example steps.
 
+- Clone this repository with git clone ```https://github.com/billodiallo/project2-enumerable.git``` using your terminal or command line.
+- Change to the project directory by entering :
+```cd project2-enumerable``` in the terminal .
+- run the command ```ruby project2-enumerable```
 <!-- CONTACT -->
 ## Contact
 
