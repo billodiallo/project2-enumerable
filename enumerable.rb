@@ -62,12 +62,30 @@ module Enumerable
     false
   end
 
-  def my_none?(param = nil)
-    if block_given?
-      !my_all?(&Proc.new)
-    else
-      !my_all?(param)
+  def my_none?(arg = nil)
+    if !block_given? && arg.nil?
+      my_each { |n| return false if n }
+      return true
     end
+
+    if !block_given? && !arg.nil?
+
+      if arg.is_a?(Class)
+        my_each { |n| return false if n.instance_of?(arg) }
+        return true
+      end
+
+      if arg.instance_of?(Regexp)
+        my_each { |n| return false if arg.match(n) }
+        return true
+      end
+
+      my_each { |n| return false if n == arg }
+      return true
+    end
+
+    my_any? { |item| return false if yield(item) }
+    true
   end
 
   def my_count(param = nil)
