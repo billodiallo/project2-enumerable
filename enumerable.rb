@@ -130,7 +130,7 @@ module Enumerable
 
     # my_inject code
 
-    end
+  end
 
 
 # section for testing the enumerable
