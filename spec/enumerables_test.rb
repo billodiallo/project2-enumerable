@@ -99,4 +99,22 @@ describe Enumerable do
       expect([2, 3, 5, 7].my_map { |i| i * 2 }).to eq([4, 6, 10, 14])
     end
   end
+
+  describe '#my_inject' do
+    it 'returns the sum of elments in an array/range' do
+        expect((1..5).my_inject {|sum, i| sum + i}).to eq(15)
+    end
+    it 'returns the longest string in an array' do
+        my_array  = ['cat', 'dog', 'bear'].my_inject do |memo, word|
+            memo.length > word.length ? memo : word
+        end
+        expect(my_array).to eq('bear')
+    end
+  end
+
+  describe '#multiply_els' do
+    it 'multiplies all the elements of the array' do
+        expect(multiply_els([3, 6, 7])).to eql(126)
+    end
+  end
 end
