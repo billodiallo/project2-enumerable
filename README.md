@@ -27,6 +27,20 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature-enum`)
 5. Open a Pull Request
 
+# Testing 
+- Open Terminal
+
+- Install RSpec on your system by running:
+ 
+```
+gem install rspec
+```
+
+- Run the tests with the command:
+
+```
+rspec 
+```
 
 <!-- CONTACT -->
 ## Contact
