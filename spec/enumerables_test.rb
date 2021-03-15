@@ -102,19 +102,19 @@ describe Enumerable do
 
   describe '#my_inject' do
     it 'returns the sum of elments in an array/range' do
-        expect((1..5).my_inject {|sum, i| sum + i}).to eq(15)
+      expect((1..5).my_inject { |sum, i| sum + i }).to eq(15)
     end
     it 'returns the longest string in an array' do
-        my_array  = ['cat', 'dog', 'bear'].my_inject do |memo, word|
-            memo.length > word.length ? memo : word
-        end
-        expect(my_array).to eq('bear')
+      my_array = %w[cat dog bear].my_inject do |memo, word|
+        memo.length > word.length ? memo : word
+      end
+      expect(my_array).to eq('bear')
     end
   end
 
   describe '#multiply_els' do
     it 'multiplies all the elements of the array' do
-        expect(multiply_els([3, 6, 7])).to eql(126)
+      expect(multiply_els([3, 6, 7])).to eql(126)
     end
   end
 end
